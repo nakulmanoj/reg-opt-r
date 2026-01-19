@@ -14,3 +14,15 @@ X_scaled <- scale(X)
 
 data_scaled <- data.frame(diagnosis = y, X_scaled)
 summary(data_scaled)
+
+set.seed(42)
+n <- nrow(data_scaled)
+idx <- sample(1:n, size = 0.8 * n)
+
+train <- data_scaled[idx, ]
+test  <- data_scaled[-idx, ]
+
+table(train$diagnosis)
+table(test$diagnosis)
+
+write.csv(data_scaled, "dataset/bcwd/processed_wdbc.csv", row.names = FALSE)
